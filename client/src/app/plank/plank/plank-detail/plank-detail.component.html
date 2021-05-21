@@ -1,0 +1,45 @@
+
+<div class="container" >
+    <div style="text-align:center">
+     
+    </div>
+    <div class="row">
+      <div class="column">
+          
+        <img src="../../../../assets/image/{{plank.id}}.JPG" style="width:90%">
+      </div>
+      <div class="column">
+        <mat-card *ngIf="plank">
+            <mat-card-header>
+                <mat-card-title><mat-icon>handyman</mat-icon>    {{ plank.titel }} </mat-card-title>
+                <mat-card-subtitle>Price: {{plank.prijs}}€</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <h4 mat-subheader>Size: </h4>
+                {{ plank.lengte }} x {{ plank.breedte }} x {{ plank.dikte }} (in cm)
+            </mat-card-content>
+            <mat-card-content>
+                <h4 mat-subheader>Material: </h4>
+                {{plank.materiaal}}
+            </mat-card-content>
+            <mat-card-content>
+                <h4 mat-subheader>Amount in stock: </h4>
+                {{plank.aantalInStock}}
+            </mat-card-content>
+            <mat-card-content>
+                <h4 mat-subheader>Description: </h4>
+                {{plank.beschrijving}}
+            </mat-card-content>
+            <mat-card-content>
+                <h4 mat-subheader>Tags: </h4>
+                    <p *ngFor="let tag of plank.tags">
+                        <app-tag [tag]  ="tag"></app-tag>
+                    </p>
+            </mat-card-content>
+           
+                </mat-card> 
+      </div>
+    </div>
+  </div>
+  
+  

@@ -1,0 +1,45 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar> <img src="../../assets/image/klein_logo.png" style="height:90%"></mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink] ="['cuttingboard/home']" data-cy="home">Home</a>
+      <a mat-list-item [routerLink] ="['cuttingboard/list']"data-cy="all" >Cuttingboards</a>
+      <a mat-list-item [routerLink] ="['cuttingboard/add']" data-cy="add" *ngIf="loggedInUser$ | async as user;">Add cuttingboard</a>
+      <a mat-list-item [routerLink] ="['cuttingboard/contact']" data-cy="c">Contact</a>
+    </mat-nav-list>
+    <span class="fill-space"></span>
+    <span *ngIf="loggedInUser$ | async as user; else loginTemplate">
+      {{ user }}
+      <button (click)="logout()" mat-flat-button>
+        logout
+      </button>
+    </span>
+    <ng-template #loginTemplate>
+      <span>
+        <button (click)="login()" mat-flat-button>
+          login
+        </button>
+      </span>
+    </ng-template>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div >
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span ></span>
+    </div>
+    <img src="../../assets/image/logo.jpg" class="logo">
+
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

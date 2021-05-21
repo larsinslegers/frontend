@@ -1,0 +1,39 @@
+<div fxLayout="column" fxLayoutGap="2%" data-cy="list">
+  <mat-card class="fil">
+    <mat-form-field>
+      <input matInput placeholder="Filter on name" type="text" (keyup)="this.filterPlank$.next($event.target.value)" data-cy="filterInput"/>
+     </mat-form-field>
+
+     <br/>
+   
+   </mat-card>
+   
+   <div *ngIf="(planken$ | async) as planken; else loadingOrError">
+       <div
+     fxLayout="row wrap"
+     fxLayout.xs="column"
+    fxLayoutGap="0.5%"
+    fxLayoutAlign="start"
+  >
+    <div 
+      class="plank"
+      *ngFor="let pl of (planken$ | async | plankFilter: filterPlankName)"
+      fxFlex="0 0 calc(25%-0.5%)"
+      fxFlex.xs="100%"
+    > 
+    <app-plank [plank]="pl" data-cy="plankList"></app-plank>  
+     </div>
+   </div>
+   </div>
+   <ng-template #loadingOrError>
+     <mat-card class="error" *ngIf="errorMessage; else loading" data-cy="error">
+        Error loading the cuttingboard list: {{ errorMessage }}. <br/>
+         Please try again later.
+     </mat-card>
+     <mat-card>
+       <ng-template #loading>
+         <mat-spinner></mat-spinner>
+       </ng-template>
+     </mat-card>
+   </ng-template> 
+</div>

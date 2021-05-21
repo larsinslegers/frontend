@@ -1,0 +1,68 @@
+<mat-card  data-cy="addp">
+ <form [formGroup]="plankFG" (ngSubmit)="submitPlank()">
+  <mat-form-field>
+    <input matInput placeholder="name" type="text" aria-label="name"   formControlName="name"  data-cy="a1" />
+    <mat-error data-cy="ae" >Name is required!</mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input matInput placeholder="material" type="text" aria-label="material"    formControlName="material" data-cy="a2" />
+    <mat-error>Material is required!</mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input matInput placeholder="price in €" type="number" min="0" step=".01" aria-label="price"   formControlName="price" />
+    <mat-error>There is a positive number required!</mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input matInput placeholder="length" type="length" min="0" step=".01" aria-label="length"   formControlName="length" />
+    <mat-error>There is a positive number required!</mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input matInput placeholder="width" type="number" min="0" step=".01" aria-label="width"   formControlName="width" />
+    <mat-error>There is a positive number required!</mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input matInput placeholder="thickness" type="number" min="0" step=".01" aria-label="thickness"   formControlName="thickness" />
+    <mat-error>There is a positive number required!</mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input matInput placeholder="amount in stock" type="number" min="0" step="1" aria-label="amount"   formControlName="amount" />
+    <mat-error>Positive integer required!</mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <textarea matInput placeholder="description" type="text"  aria-label="description"   formControlName="description" data-cy="a3" ></textarea>
+    <mat-error>Description is required!</mat-error>
+  </mat-form-field>
+  <br/>
+
+  
+  <div>
+    <div formArrayName="tags"
+  *ngFor="let item of plankFG.get('tags')['controls']; let i = index">
+  <div [formGroupName]="i">
+    <mat-form-field>
+      <input matInput placeholder="tag" aria-label="tag"
+        type="text" formControlName="name"/>
+    </mat-form-field>
+  </div>
+</div>
+  </div>
+
+  <br/>
+  <br/>
+    <button  type="submit" mat-raised-button [disabled]="!plankFG.valid" data-cy="a4">
+     add cuttingboard
+    </button>
+ </form>
+</mat-card> 
+<mat-card class="error" *ngIf="errorMessage" data-cy="appError">
+  got an error while adding the recipe: {{ errorMessage }}
+</mat-card>  
+
+

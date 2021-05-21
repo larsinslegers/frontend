@@ -1,0 +1,9 @@
+.blok{
+  position: relative; 
+  min-height: 450px;
+}
+.trash{
+    position: absolute;
+    bottom: 8px;
+    left:16px;
+}

@@ -1,0 +1,16 @@
+<mat-card class="blok" data-cy="laden">
+    <div (click)="detailsPlank()">
+    <mat-card-header>
+        <mat-card-title><mat-icon>handyman</mat-icon>    {{ plank.titel }} </mat-card-title>
+        <mat-card-subtitle>Price: {{plank.prijs}}€</mat-card-subtitle>
+    </mat-card-header>
+    <img src="../../../assets/image/{{plank.id}}.JPG"  style="width:90%">
+    <mat-card-content>
+        <h3 mat-subheader>Description: </h3>
+        {{plank.beschrijving}}
+    </mat-card-content>
+</div>
+    <button class="trash" (click)="deletePlank()" *ngIf="loggedInUser$ | async as user;">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+  </mat-card>  
